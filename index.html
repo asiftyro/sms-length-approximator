@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Asif R. Porosh">
+  <meta name="description" content="SMS Character analyzer and length approximator">
+  <title>SMS Length Approximator</title>
+  <link rel="stylesheet" href="water.dark.min.css">
+</head>
+
+<body>
+  <h3>SMS Length Approximator</h3>
+
+  <hr>
+
+  <div>
+    <textarea id="txt_sms" style="margin-bottom: 0px;" rows="5" placeholder="Write SMS ..."></textarea>
+    <label for="txt_sms"><a id="lnk_clear" href="javascript:void(0)" style="font-size: .9em;">[ Clear &times; ]</a></label>
+  </div>
+
+  <div id="div_result" style="margin-top:10px; border: 1px dotted;padding: 10px;border-radius: 5px; background-color: #1d1f32; font-size:.9em;">
+  </div>
+
+  <div style="margin-top:10px">
+    <details> 
+      <summary style="cursor: pointer;color:#40ADFF">Special Characters/Symbols Description</summary>
+      <div>
+        <table>
+          <thead>
+              <tr>
+                  <th>Symbol</th>
+                  <th>Description</th>
+                  <th>Hex Code</th>
+                  <th>Dec Code</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>NUL</td>
+                  <td>Null character</td>
+                  <td>0x00</td>
+                  <td>0</td>
+              </tr>
+              <tr>
+                  <td>SOH</td>
+                  <td>Start of Heading</td>
+                  <td>0x01</td>
+                  <td>1</td>
+              </tr>
+              <tr>
+                  <td>STX</td>
+                  <td>Start of Text</td>
+                  <td>0x02</td>
+                  <td>2</td>
+              </tr>
+              <tr>
+                  <td>ETX</td>
+                  <td>End of Text</td>
+                  <td>0x03</td>
+                  <td>3</td>
+              </tr>
+              <tr>
+                  <td>EOT</td>
+                  <td>End of Transmission</td>
+                  <td>0x04</td>
+                  <td>4</td>
+              </tr>
+              <tr>
+                  <td>ENQ</td>
+                  <td>Enquiry</td>
+                  <td>0x05</td>
+                  <td>5</td>
+              </tr>
+              <tr>
+                  <td>ACK</td>
+                  <td>Acknowledge</td>
+                  <td>0x06</td>
+                  <td>6</td>
+              </tr>
+              <tr>
+                  <td>BEL</td>
+                  <td>Bell, Alert</td>
+                  <td>0x07</td>
+                  <td>7</td>
+              </tr>
+              <tr>
+                  <td>BS</td>
+                  <td>Backspace</td>
+                  <td>0x08</td>
+                  <td>8</td>
+              </tr>
+              <tr>
+                  <td>HT</td>
+                  <td>Horizontal Tab</td>
+                  <td>0x09</td>
+                  <td>9</td>
+              </tr>
+              <tr>
+                  <td>LF</td>
+                  <td>Line Feed</td>
+                  <td>0x0A</td>
+                  <td>10</td>
+              </tr>
+              <tr>
+                  <td>VT</td>
+                  <td>Vertical Tabulation</td>
+                  <td>0x0B</td>
+                  <td>11</td>
+              </tr>
+              <tr>
+                  <td>FF</td>
+                  <td>Form Feed</td>
+                  <td>0x0C</td>
+                  <td>12</td>
+              </tr>
+              <tr>
+                  <td>CR</td>
+                  <td>Carriage Return</td>
+                  <td>0x0D</td>
+                  <td>13</td>
+              </tr>
+              <tr>
+                  <td>SO</td>
+                  <td>Shift Out</td>
+                  <td>0x0E</td>
+                  <td>14</td>
+              </tr>
+              <tr>
+                  <td>SI</td>
+                  <td>Shift In</td>
+                  <td>0x0F</td>
+                  <td>15</td>
+              </tr>
+              <tr>
+                  <td>DLE</td>
+                  <td>Data Link Escape</td>
+                  <td>0x10</td>
+                  <td>16</td>
+              </tr>
+              <tr>
+                  <td>DC1</td>
+                  <td>Device Control One (XON)</td>
+                  <td>0x11</td>
+                  <td>17</td>
+              </tr>
+              <tr>
+                  <td>DC2</td>
+                  <td>Device Control Two</td>
+                  <td>0x12</td>
+                  <td>18</td>
+              </tr>
+              <tr>
+                  <td>DC3</td>
+                  <td>Device Control Three (XOFF)</td>
+                  <td>0x13</td>
+                  <td>19</td>
+              </tr>
+              <tr>
+                  <td>DC4</td>
+                  <td>Device Control Four</td>
+                  <td>0x14</td>
+                  <td>20</td>
+              </tr>
+              <tr>
+                  <td>NAK</td>
+                  <td>Negative Acknowledge</td>
+                  <td>0x15</td>
+                  <td>21</td>
+              </tr>
+              <tr>
+                  <td>SYN</td>
+                  <td>Synchronous Idle</td>
+                  <td>0x16</td>
+                  <td>22</td>
+              </tr>
+              <tr>
+                  <td>ETB</td>
+                  <td>End of Transmission Block</td>
+                  <td>0x17</td>
+                  <td>23</td>
+              </tr>
+              <tr>
+                  <td>CAN</td>
+                  <td>Cancel</td>
+                  <td>0x18</td>
+                  <td>24</td>
+              </tr>
+              <tr>
+                  <td>EM</td>
+                  <td>End of medium</td>
+                  <td>0x19</td>
+                  <td>25</td>
+              </tr>
+              <tr>
+                  <td>SUB</td>
+                  <td>Substitute</td>
+                  <td>0x1A</td>
+                  <td>26</td>
+              </tr>
+              <tr>
+                  <td>ESC</td>
+                  <td>Escape</td>
+                  <td>0x1B</td>
+                  <td>27</td>
+              </tr>
+              <tr>
+                  <td>FS</td>
+                  <td>File Separator</td>
+                  <td>0x1C</td>
+                  <td>28</td>
+              </tr>
+              <tr>
+                  <td>GS</td>
+                  <td>Group Separator</td>
+                  <td>0x1D</td>
+                  <td>29</td>
+              </tr>
+              <tr>
+                  <td>RS</td>
+                  <td>Record Separator</td>
+                  <td>0x1E</td>
+                  <td>30</td>
+              </tr>
+              <tr>
+                  <td>US</td>
+                  <td>Unit Separator</td>
+                  <td>0x1F</td>
+                  <td>31</td>
+              </tr>
+              <tr>
+                  <td>SP</td>
+                  <td>Space</td>
+                  <td>0x20</td>
+                  <td>32</td>
+              </tr>
+              <tr>
+                  <td>DEL</td>
+                  <td>Delete</td>
+                  <td>0x7F</td>
+                  <td>127</td>
+              </tr>
+              <tr>
+                  <td>SHY</td>
+                  <td>Soft hyphen</td>
+                  <td>0xAD</td>
+                  <td>173</td>
+              </tr>
+              <tr>
+                  <td>SP</td>
+                  <td>Space</td>
+                  <td>0x20</td>
+                  <td>32</td>
+              </tr>
+              <tr>
+                  <td>NBSP</td>
+                  <td>Non-breaking space</td>
+                  <td>0xA0</td>
+                  <td>160</td>
+              </tr>
+          </tbody>
+      </table>
+      </div> 
+    </details>
+  </div>
+
+  <br>
+
+  <hr>
+
+  <center>
+    <p>CopyLeft <span style="display: inline-block;transform: rotate(180deg);">&copy;</span> Asif R. Porosh</p>
+  </center>
+
+  <script src="app.js"></script>
+
+</body>
+
+</html>

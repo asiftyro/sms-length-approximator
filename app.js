@@ -68,7 +68,7 @@ let analyze = (sms_content) => {
     } else if (ascii_non_punct_count == 0) {
         content_type = "UNICODE ONLY"
     } else if (non_ascii_count > 0 && ascii_non_punct_count > 0) {
-        content_type = "ASCII AND UNICODE MIXED"
+        content_type = "ASCII AND NON-ASCII MIXED"
     }
 
     if (content_type == "ASCII ONLY") {
@@ -82,10 +82,10 @@ let analyze = (sms_content) => {
     let non_ascii_punct_char_perc = non_punct_char_count ? (100 * non_ascii_count / non_punct_char_count).toFixed(2) : 0;
 
     div_result.innerHTML = "";
-    div_result.innerHTML += `CONTENT TYPE: <b>${content_type}</b><br><br>TOTAL CHARACTERS: ${sms_length}<br>PARTS: ${sms_parts}<br><br>ASCII LENGTH: <b>${ascii_non_punct_count} (${ascii_non_punct_char_perc}%)</b><br>NON ASCII LENGTH: <b>${non_ascii_count} (${non_ascii_punct_char_perc}%)</b><br>PUNCTUATION AND OTHERS LENGTH: <b>${ascii_punct_count}</b>`;
+    div_result.innerHTML += `CONTENT TYPE: <b>${content_type}</b><br><br>TOTAL CHARACTERS: ${sms_length}<br>PARTS: ${sms_parts}<br><br>ASCII LENGTH: <b>${ascii_non_punct_count} (${ascii_non_punct_char_perc}%)</b><br>NON-ASCII LENGTH: <b>${non_ascii_count} (${non_ascii_punct_char_perc}%)</b><br>PUNCTUATION AND OTHERS LENGTH: <b>${ascii_punct_count}</b>`;
     div_result.innerHTML = div_result.innerHTML + `<h5>ASCII : ${ascii_non_punct_count} (${ascii_non_punct_char_perc}%)</h5>`;
     div_result.innerHTML = div_result.innerHTML + `<p>${ascii_non_punct_char}</p>`;
-    div_result.innerHTML = div_result.innerHTML + `<h5>NON ASCII : ${non_ascii_count} (${non_ascii_punct_char_perc}%)</h5>`;
+    div_result.innerHTML = div_result.innerHTML + `<h5>NON-ASCII : ${non_ascii_count} (${non_ascii_punct_char_perc}%)</h5>`;
     div_result.innerHTML = div_result.innerHTML + `<p>${non_ascii_char}</p>`;
     div_result.innerHTML = div_result.innerHTML + `<h5>PUNCTUATION AND OTHERS : ${ascii_punct_count}</h5>`;
     div_result.innerHTML = div_result.innerHTML + `<p>${ascii_punct_char}</p>`;
